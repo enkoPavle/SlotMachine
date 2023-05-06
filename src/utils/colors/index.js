@@ -1,0 +1,16 @@
+export const colors = {
+  primary: '#FF3030',
+  secondary: '#414141',
+  white: '#FFFFFF',
+  black: '#000000',
+  light_gray: '#E4E4E4',
+  deep_gray: '#C4C4C4',
+  main_gray: '#939393',
+  bottom_sheet_gray: '#F5F5F5',
+  fresh_apple: '#61B52D',
+  autumn: '#F1A619',
+  sea: '#1DA7F5',
+  semi_transperent_white: '#FFFFFFF2',
+  semi_transperent_gray: 'rgba(127, 127, 127, 0.6)',
+  semi_transperent_gray_header: 'rgba(127, 127, 127, 0.01)',
+};
