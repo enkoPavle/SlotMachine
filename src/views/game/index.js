@@ -17,7 +17,7 @@ import {colors} from '../../utils/colors';
 
 const fileDir = RNFS.DocumentDirectoryPath + '/webroot';
 
-const Game = () => {
+const Game = ({navigation}) => {
   const [origin, setOrigin] = useState('');
 
   const start = async server => {
