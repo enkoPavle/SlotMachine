@@ -1,13 +1,15 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import ButtonShadow from '../../components/ui/button';
 import OrientationLocker from 'react-native-orientation-locker';
 import {WebView} from 'react-native-webview';
 import {TERMS_AND_CONDITIONS_LINK} from '@env';
+import {PolicyContext} from '../../context';
 
-const Terms = ({navigation}) => {
+const Terms = () => {
   const webViewRef = useRef(null);
   const [isRead, setIsRead] = useState(false);
+  const {setIsAgree} = useContext(PolicyContext);
 
   const onScroll = event => {
     if (isRead) return;
@@ -21,13 +23,9 @@ const Terms = ({navigation}) => {
     if (isScrolledToBottom) setIsRead(true);
   };
 
-  const onAccept = () => {
-    navigation.navigate('Game');
-  };
-
   useEffect(() => {
     OrientationLocker.lockToPortrait();
-  }, [navigation]);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -42,7 +40,7 @@ const Terms = ({navigation}) => {
       <ButtonShadow
         title={'Accept'}
         containerStyle={styles.buttonContainer}
-        onPress={onAccept}
+        onPress={setIsAgree}
         disabled={!isRead}
       />
     </SafeAreaView>

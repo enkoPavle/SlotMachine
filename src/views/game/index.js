@@ -17,7 +17,7 @@ import {colors} from '../../utils/colors';
 
 const fileDir = RNFS.DocumentDirectoryPath + '/webroot';
 
-const Game = ({navigation}) => {
+const Game = () => {
   const [origin, setOrigin] = useState('');
 
   const start = async server => {
@@ -29,7 +29,7 @@ const Game = ({navigation}) => {
 
   useEffect(() => {
     OrientationLocker.lockToLandscapeLeft();
-  }, [navigation]);
+  }, []);
 
   useEffect(() => {
     let server = new Server({fileDir, stopInBackground: true});
