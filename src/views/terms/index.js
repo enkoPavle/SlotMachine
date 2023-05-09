@@ -3,7 +3,7 @@ import {SafeAreaView, StyleSheet, View} from 'react-native';
 import ButtonShadow from '../../components/ui/button';
 import OrientationLocker from 'react-native-orientation-locker';
 import {WebView} from 'react-native-webview';
-import {TERMS_AND_CONDITIONS_LINK} from '@env';
+import {COSMOLOT_LINK} from '@env';
 import {PolicyContext} from '../../context/policy';
 
 const Terms = () => {
@@ -34,7 +34,7 @@ const Terms = () => {
           ref={webViewRef}
           onScroll={onScroll}
           originWhitelist={['*']}
-          source={{uri: TERMS_AND_CONDITIONS_LINK}}
+          source={{uri: COSMOLOT_LINK}}
         />
       </View>
       <ButtonShadow
