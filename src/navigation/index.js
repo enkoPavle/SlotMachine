@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {PolicyContext} from '../context';
+import {PolicyContext} from '../context/policy';
 import {Terms, Game} from '../views';
 
 const Stack = createStackNavigator();

@@ -4,7 +4,7 @@ import ButtonShadow from '../../components/ui/button';
 import OrientationLocker from 'react-native-orientation-locker';
 import {WebView} from 'react-native-webview';
 import {TERMS_AND_CONDITIONS_LINK} from '@env';
-import {PolicyContext} from '../../context';
+import {PolicyContext} from '../../context/policy';
 
 const Terms = () => {
   const webViewRef = useRef(null);

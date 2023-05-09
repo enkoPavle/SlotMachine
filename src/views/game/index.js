@@ -1,74 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import {
-  Image,
-  Platform,
-  SafeAreaView,
-  StyleSheet,
-  StatusBar,
-} from 'react-native';
-import RNFS from 'react-native-fs';
+import React, {useContext, useEffect} from 'react';
+import {Image, SafeAreaView, StyleSheet, StatusBar} from 'react-native';
 import {WebView} from 'react-native-webview';
 import OrientationLocker from 'react-native-orientation-locker';
-import Server, {
-  extractBundledAssets,
-} from '@dr.pogodin/react-native-static-server';
 import backgroundImage from '../../../assets/webroot/images/shared-0-sheet0.png';
 import {colors} from '../../utils/colors';
-
-const fileDir = RNFS.DocumentDirectoryPath + '/webroot';
+import {StaticServerContext} from '../../context/static-server';
 
 const Game = () => {
-  const [origin, setOrigin] = useState('');
-
-  const start = async server => {
-    const result = await server?.start();
-    if (result && server) {
-      setOrigin(result);
-    }
-  };
+  const origin = useContext(StaticServerContext);
 
   useEffect(() => {
     OrientationLocker.lockToLandscapeLeft();
-  }, []);
-
-  useEffect(() => {
-    let server = new Server({fileDir, stopInBackground: true});
-
-    start(server);
-
-    (async () => {
-      if (Platform.OS === 'android') {
-        let extract = true;
-        try {
-          const versionD = await RNFS.readFile(`${fileDir}/version.xml`);
-          const versionA = await RNFS.readFileAssets('webroot/version.xml');
-
-          if (versionA === versionD) {
-            extract = false;
-          } else {
-            await RNFS.unlink(fileDir);
-          }
-        } catch {
-          console.log('extract error');
-        }
-        if (extract) {
-          await extractBundledAssets(fileDir, 'webroot');
-        }
-      }
-
-      const result = await server?.start();
-      if (result && server) {
-        setOrigin(result);
-      }
-    })();
-
-    return () => {
-      (async () => {
-        setOrigin('');
-        server?.stop();
-        server = null;
-      })();
-    };
   }, []);
 
   return (
@@ -84,7 +26,9 @@ const Game = () => {
         style={styles.webview}
         originWhitelist={['*']}
         cacheMode="LOAD_NO_CACHE"
-        source={{uri: origin}}
+        source={{
+          uri: origin,
+        }}
       />
     </SafeAreaView>
   );
