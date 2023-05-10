@@ -33,6 +33,8 @@ const Terms = () => {
         <WebView
           ref={webViewRef}
           onScroll={onScroll}
+          allowFileAccess={true}
+          scalesPageToFit={true}
           originWhitelist={['*']}
           source={{uri: TERMS_AND_CONDITIONS_LINK}}
         />
