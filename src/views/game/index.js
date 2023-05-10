@@ -24,8 +24,6 @@ const Game = () => {
       />
       <WebView
         style={styles.webview}
-        allowFileAccess={true}
-        scalesPageToFit={true}
         originWhitelist={['*']}
         cacheMode="LOAD_NO_CACHE"
         source={{

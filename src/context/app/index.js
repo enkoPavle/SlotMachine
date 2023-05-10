@@ -27,12 +27,10 @@ export const AppProvider = ({children}) => {
         if (data) {
           setIsAgreeButtonShow(data.show_button);
           setIsLoaded(true);
+          setIsLoading(false);
         }
       })
-      .catch(error => {
-        console.log('error', error);
-      })
-      .finally(() => {
+      .catch(() => {
         setIsLoading(false);
       });
   };
