@@ -1,22 +1,23 @@
 import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {PolicyContext} from '../context/policy';
+import {AppContext} from '../context/app';
 import {Terms, Game} from '../views';
 
 const Stack = createStackNavigator();
 
 const Navigation = () => {
-  const {isAgree} = useContext(PolicyContext);
+  const {visibleView} = useContext(AppContext);
 
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        {isAgree ? (
-          <Stack.Screen name="Game" component={Game} />
-        ) : (
-          <Stack.Screen name="Terms" component={Terms} />
-        )}
+        {
+          {
+            terms: <Stack.Screen name="Terms" component={Terms} />,
+            game: <Stack.Screen name="Game" component={Game} />,
+          }[visibleView]
+        }
       </Stack.Navigator>
     </NavigationContainer>
   );

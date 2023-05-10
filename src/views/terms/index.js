@@ -3,13 +3,13 @@ import {SafeAreaView, StyleSheet, View} from 'react-native';
 import ButtonShadow from '../../components/ui/button';
 import OrientationLocker from 'react-native-orientation-locker';
 import {WebView} from 'react-native-webview';
-import {COSMOLOT_LINK} from '@env';
-import {PolicyContext} from '../../context/policy';
+import {TERMS_AND_CONDITIONS_LINK} from '@env';
+import {AppContext} from '../../context/app';
 
 const Terms = () => {
   const webViewRef = useRef(null);
   const [isRead, setIsRead] = useState(false);
-  const {setIsAgree} = useContext(PolicyContext);
+  const {isAgreeButtonShow, setIsTermsAgreed} = useContext(AppContext);
 
   const onScroll = event => {
     if (isRead) return;
@@ -34,15 +34,17 @@ const Terms = () => {
           ref={webViewRef}
           onScroll={onScroll}
           originWhitelist={['*']}
-          source={{uri: COSMOLOT_LINK}}
+          source={{uri: TERMS_AND_CONDITIONS_LINK}}
         />
       </View>
-      <ButtonShadow
-        title={'Accept'}
-        containerStyle={styles.buttonContainer}
-        onPress={setIsAgree}
-        disabled={!isRead}
-      />
+      {isAgreeButtonShow ? (
+        <ButtonShadow
+          title={'Accept'}
+          containerStyle={styles.buttonContainer}
+          onPress={setIsTermsAgreed}
+          disabled={!isRead}
+        />
+      ) : null}
     </SafeAreaView>
   );
 };

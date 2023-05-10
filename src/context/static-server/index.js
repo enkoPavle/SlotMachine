@@ -11,7 +11,9 @@ export const StaticServerProvider = ({children}) => {
   const [origin, setOrigin] = useState('');
   const value = useMemo(() => origin, [origin]);
 
+  
   useEffect(() => {
+    return 
     let server = new Server({fileDir, stopInBackground: true});
 
     (async () => {
